@@ -1,10 +1,11 @@
 export default {
-  server: {
-    port: process.env.NUXT_PORT || 3000,
-    host: "0.0.0.0", // default: localhost,
-    timing: false
-  },
-  ssr: true,
+  target: 'static',
+  // server: {
+  //   port: process.env.NUXT_PORT || 3000,
+  //   host: "0.0.0.0", // default: localhost,
+  //   timing: false
+  // },
+  // ssr: true,
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'dexia-vuejs',
