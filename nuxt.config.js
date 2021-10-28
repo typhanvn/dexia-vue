@@ -1,5 +1,4 @@
 export default {
-  target: 'static',
   server: {
     port: process.env.NUXT_PORT || 3000,
     host: "0.0.0.0", // default: localhost,
