@@ -1,4 +1,4 @@
-# dexia-vuejs
+# dexia-vue
 
 ## Build Setup
 

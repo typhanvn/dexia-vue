@@ -1,13 +1,7 @@
 export default {
-  server: {
-    port: process.env.NUXT_PORT || 3000,
-    host: "0.0.0.0", // default: localhost,
-    timing: false
-  },
-  ssr: true,
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'dexia-vuejs',
+    title: 'dexia-vue',
     htmlAttrs: {
       lang: 'en'
     },
@@ -24,8 +18,6 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-    '~/assets/css/main.css',
-    '~/assets/css/custom.css',
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -33,9 +25,7 @@ export default {
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
-  components: [
-    { path: '~/components/common/' },
-  ],
+  components: true,
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
@@ -43,21 +33,11 @@ export default {
     '@nuxtjs/eslint-module',
     // https://go.nuxtjs.dev/stylelint
     '@nuxtjs/stylelint-module',
-    '@nuxtjs/composition-api/module',
-    '@nuxtjs/dotenv',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-    // https://axios.nuxtjs.org/setup
-    '@nuxtjs/axios'
   ],
-
-  axios: {
-    // proxy: true,
-    retry: true,
-    baseURL: 'https://dexia-intranet-default-rtdb.firebaseio.com/api'
-  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
