@@ -56,7 +56,7 @@ export default {
   axios: {
     // proxy: true,
     retry: true,
-    baseURL: process.env.API_URL
+    baseURL: 'https://dexia-intranet-default-rtdb.firebaseio.com/api'
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
