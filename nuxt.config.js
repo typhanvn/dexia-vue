@@ -25,6 +25,7 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    '~/plugins/i18n.js',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -51,6 +52,10 @@ export default {
     // proxy: true,
     retry: true,
     baseURL: 'https://dexia-intranet-default-rtdb.firebaseio.com/api'
+  },
+
+  router: {
+    middleware: ['i18n']
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

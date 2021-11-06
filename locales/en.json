@@ -1,0 +1,20 @@
+{
+  "title": "Dexia EN",
+  "header": {
+    "welcome": "Hello Sophie",
+    "label_phone": "European emergency number",
+    "label_date": "Wednesday 03 November 2021",
+    "main_menu": {
+      "li_enter": "My company",
+      "li_act": "My news",
+      "li_eve": "My events",
+      "li_info": "My practical info",
+      "li_poli": "My policies and procedures",
+      "li_app": "My applications & tools"
+    }
+  },
+  "banner": {
+    "read_more": "Read more",
+    "favorite": "Add to my favorites"
+  }
+}

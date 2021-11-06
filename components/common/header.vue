@@ -8,18 +8,19 @@
         <div class="contact">
           <div class="contact__text">
             <i class="icon-phone"></i>
-            N° d’urgence local
+            {{ $t('header.label_phone') }}
           </div>
-          <a href="tel:0101010101" class="contact__phone"
-            >FR : 01 01 01 01 01</a
-          >
+          <a href="tel:112" class="contact__phone">112</a>
         </div>
       </div>
       <div class="header-top__right">
-        <div class="date-time">Mardi 12 décembre 2020</div>
+        <div class="date-time">{{ $t('header.label_date') }}</div>
         <ul class="list-icon">
           <li class="user">
-            <a href="#"><span>Bonjour Sophie</span><i class="icon-user"></i></a>
+            <a href="#"
+              ><span>{{ $t('header.welcome') }}</span
+              ><i class="icon-user"></i
+            ></a>
             <ul>
               <li><a href="/fr/user/220/edit">Profile</a></li>
               <li><a href="/fr/user/220/edit">Logout</a></li>
@@ -32,12 +33,20 @@
             <a href="#"><i class="icon-heart-empty"></i></a>
           </li>
         </ul>
-        <div class="dropdown-language">
-          <button class="dropdown-language__btn">FR</button>
+        <div
+          class="dropdown-language"
+          :class="{ open: isOpenLang }"
+          @click="openLang"
+        >
+          <button class="dropdown-language__btn">{{ langCurrent }}</button>
           <ul class="dropdown-language__content">
-            <li><a href="#">AU</a></li>
-            <li><a href="#">DE</a></li>
-            <li><a href="#">US</a></li>
+            <li
+              v-for="(item, index) in languages"
+              :key="index"
+              @click="changeLang(item)"
+            >
+              {{ item }}
+            </li>
           </ul>
         </div>
         <form action="#" class="form-search">
@@ -84,7 +93,9 @@
         </div>
         <ul class="main-menu">
           <li class="has-sub">
-            <nuxt-link to="mon-entreprise">Mon entreprise</nuxt-link>
+            <nuxt-link to="mon-entreprise">{{
+              $t('header.main_menu.li_enter')
+            }}</nuxt-link>
             <ul class="submenu">
               <li><a href="#">Le comité de direction</a></li>
               <li class="has-child">
@@ -119,12 +130,24 @@
               </li>
             </ul>
           </li>
-          <li><a href="#">Mes actualités</a></li>
-          <li><a href="#">Mes Evénements</a></li>
-          <li><a href="#">Mon portail RH</a></li>
-          <li><a href="#">Mes infos pratiques</a></li>
-          <li><a href="#">Mes Politiques & Procédures</a></li>
-          <li><a href="#">Mes applications & outils</a></li>
+          <li>
+            <a href="#">{{ $t('header.main_menu.li_act') }}</a>
+          </li>
+          <li>
+            <a href="#">{{ $t('header.main_menu.li_act') }}</a>
+          </li>
+          <li>
+            <a href="#">{{ $t('header.main_menu.li_eve') }}</a>
+          </li>
+          <li>
+            <a href="#">{{ $t('header.main_menu.li_info') }}</a>
+          </li>
+          <li>
+            <a href="#">{{ $t('header.main_menu.li_poli') }}</a>
+          </li>
+          <li>
+            <a href="#">{{ $t('header.main_menu.li_app') }}</a>
+          </li>
         </ul>
       </div>
     </div>
@@ -132,11 +155,57 @@
 </template>
 
 <script>
-import { defineComponent } from '@nuxtjs/composition-api'
+import {
+  defineComponent,
+  ref,
+  useStore,
+  onMounted,
+  useRouter
+} from '@nuxtjs/composition-api'
 
 export default defineComponent({
   name: 'Header',
   components: {},
+  setup() {
+    const store = useStore()
+    const router = useRouter()
+    const isOpenLang = ref(false)
+    const languages = ref([])
+    const langCurrent = ref()
+
+    const openLang = () => {
+      if (isOpenLang.value === false) {
+        isOpenLang.value = true
+      } else {
+        isOpenLang.value = false
+      }
+    }
+
+    const getLang = () => {
+      languages.value = store.state.locales
+      langCurrent.value = store.state.locale
+    }
+
+    const changeLang = (lang) => {
+      store.commit('SET_LANG', lang)
+      router.push({
+        path: `${router.history.current.path}?lang=${lang}`
+      })
+
+      langCurrent.value = lang
+    }
+
+    onMounted(getLang)
+
+    return {
+      isOpenLang,
+      languages,
+      langCurrent,
+      openLang,
+      getLang,
+      changeLang
+    }
+  }
 })
 </script>
 
@@ -145,5 +214,12 @@ export default defineComponent({
   .nuxt-link-exact-active {
     background-color: #0296c4;
   }
+}
+.dropdown-language__content li,
+.dropdown-language__btn {
+  text-transform: uppercase;
+}
+.dropdown-language__content li {
+  padding: 0.1875rem 0.3125rem;
 }
 </style>

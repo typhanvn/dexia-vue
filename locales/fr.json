@@ -1,0 +1,20 @@
+{
+  "title": "Dexia FR",
+  "header": {
+    "welcome": "Bonjour Sophie",
+    "label_phone": "Numéro d'urgence européen",
+    "label_date": "Mercredi 03 novembre 2021",
+    "main_menu": {
+      "li_enter": "Mon entreprise",
+      "li_act": "Mes actualités",
+      "li_eve": "Mes événements",
+      "li_info": "Mes infos pratiques",
+      "li_poli": "Mes politiques & procédures",
+      "li_app": "Mes applications & outils"
+    }
+  },
+  "banner": {
+    "read_more": "Lire la suite",
+    "favorite": "Ajouter à mes favoris"
+  }
+}
