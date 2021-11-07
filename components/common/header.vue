@@ -1,4 +1,5 @@
 <template>
+<div>
   <header id="header" class="header">
     <div class="header-top">
       <div class="header-top__left">
@@ -27,7 +28,7 @@
             </ul>
           </li>
           <li class="search">
-            <a href="#"><i class="icon-search"></i></a>
+            <a href @click.prevent="isOpen()"><i class="icon-search"></i></a>
           </li>
           <li>
             <a href="#"><i class="icon-heart-empty"></i></a>
@@ -49,14 +50,25 @@
             </li>
           </ul>
         </div>
-        <form action="#" class="form-search">
-          <div class="close-search"></div>
+        <form action="#" class="form-search" :class="{ 'is-open': isActive }">
+          <div class="close-search" @click="closeSearch()"></div>
           <div class="form-group">
-            <input type="text" class="form-control" placeholder="Rechercher" />
+            <input
+              v-model.trim="search"
+              type="text"
+              class="form-control"
+              placeholder="Rechercher"
+            />
             <div class="btn-search">
-              <input type="submit" value="Search" class="input-search" /><i
-                class="icon-search"
-              ></i>
+              <input
+                type="submit"
+                value="Search"
+                class="input-search"
+                @click.prevent="isResault()"
+              />
+              <i class="icon-search">
+                <nuxt-link to="/Search"></nuxt-link>
+              </i>
             </div>
           </div>
         </form>
@@ -82,20 +94,12 @@
               >FR : 01 01 01 01 01</a
             >
           </div>
-          <div class="dropdown-language">
-            <button class="dropdown-language__btn">Français</button>
-            <ul class="dropdown-language__content">
-              <li><a href="#">Australia</a></li>
-              <li><a href="#">Germany</a></li>
-              <li><a href="#">United States</a></li>
-            </ul>
-          </div>
         </div>
         <ul class="main-menu">
           <li class="has-sub">
-            <nuxt-link to="mon-entreprise">{{
-              $t('header.main_menu.li_enter')
-            }}</nuxt-link>
+            <nuxt-link to="mon-entreprise"
+              >{{ $t('header.main_menu.li_enter') }}
+            </nuxt-link>
             <ul class="submenu">
               <li><a href="#">Le comité de direction</a></li>
               <li class="has-child">
@@ -152,6 +156,10 @@
       </div>
     </div>
   </header>
+  <div v-if="search != ''" :class="{ hide: hide }">
+      <Search :show-data-search="showDataSearch" />
+    </div>
+</div>
 </template>
 
 <script>
@@ -160,18 +168,59 @@ import {
   ref,
   useStore,
   onMounted,
-  useRouter
+  useRouter,
+  reactive,
+  toRefs,
+  computed,
 } from '@nuxtjs/composition-api'
+import Search from '../../pages/Search'
 
 export default defineComponent({
   name: 'Header',
-  components: {},
-  setup() {
+  components: {
+    Search,
+  },
+  props: {
+    dataSearch: {
+      type: Array,
+      default: () => [],
+    },
+  },
+  setup(props) {
     const store = useStore()
     const router = useRouter()
     const isOpenLang = ref(false)
     const languages = ref([])
     const langCurrent = ref()
+
+    const state = reactive({
+      isActive: false,
+      hide: true,
+      search: '',
+      toogle: '',
+
+      showDataSearch: computed(() => {
+        if (state.search) {
+          return props.dataSearch.filter((item) => {
+            return item.title.toLowerCase().includes(state.search.toLowerCase())
+          })
+        }
+      }),
+    })
+
+    const isOpen = () => {
+      state.isActive = true
+    }
+
+    const closeSearch = () => {
+      state.isActive = false
+      state.search = ''
+    }
+
+    const isResault = () => {
+      state.hide = false
+      state.isActive = false
+    }
 
     const openLang = () => {
       if (isOpenLang.value === false) {
@@ -189,7 +238,7 @@ export default defineComponent({
     const changeLang = (lang) => {
       store.commit('SET_LANG', lang)
       router.push({
-        path: `${router.history.current.path}?lang=${lang}`
+        path: `${router.history.current.path}?lang=${lang}`,
       })
 
       langCurrent.value = lang
@@ -198,14 +247,18 @@ export default defineComponent({
     onMounted(getLang)
 
     return {
+      ...toRefs(state),
+      isOpen,
+      closeSearch,
+      isResault,
       isOpenLang,
       languages,
       langCurrent,
       openLang,
       getLang,
-      changeLang
+      changeLang,
     }
-  }
+  },
 })
 </script>
 
@@ -215,11 +268,17 @@ export default defineComponent({
     background-color: #0296c4;
   }
 }
+
 .dropdown-language__content li,
 .dropdown-language__btn {
   text-transform: uppercase;
 }
+
 .dropdown-language__content li {
   padding: 0.1875rem 0.3125rem;
+}
+
+.reaserch {
+  display: block;
 }
 </style>

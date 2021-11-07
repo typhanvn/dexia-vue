@@ -1,3 +1,96 @@
 #main-content {
     padding-top: 140px;
 }
+
+.pagination .page-item.active a {
+    color: #002596;
+} 
+
+  .pagination {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+  }
+
+.pagination li {
+    margin-right: 0.5rem;
+    position: relative;
+}
+
+.pagination li.page-item:not(.disabled).active a, 
+.pagination li.page-item:not(.disabled):hover a {
+    color: #002596;
+}
+
+.pagination li:after {
+    content: '';
+    border-radius: 50%;
+    width: 1.875rem;
+    height: 1.875rem;
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-color: #00a7db;
+    transition: transform .3s;
+    transform: scale(0);
+}
+
+.pagination li.page-item:hover:after {
+    transform: scale(1);
+}
+
+.pagination li.page-item.last,
+.pagination li.page-item.first {
+    display: none;
+}
+
+.pagination li.page-item.previous a::before {
+    content: '\E80C';
+    font-size: 0.75rem;
+    font-family: fontello;
+    letter-spacing: normal;
+    font-weight: 400;
+    font-style: normal;
+    text-decoration: none;
+    user-select: none;
+    color: #002596;
+}
+
+.pagination li.page-item.next a::before {
+    content: '\E80B';
+    font-size: 0.75rem;
+    font-family: fontello;
+    letter-spacing: normal;
+    font-weight: 400;
+    font-style: normal;
+    text-decoration: none;
+    user-select: none;
+    color: #002596;
+}
+
+.pagination li.page-item.previous a,
+.pagination li.page-item.next a {
+    font-size: 0 !important;
+}
+
+.pagination a {
+    font-size: 0.6875rem;
+    line-height: 1.1875rem;
+    font-weight: bold;
+    letter-spacing: 0.0625rem;
+    height: 1.875rem;
+    width: 1.875rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+    color: #c1c9ca;
+}
+
+.page-number a.page-link:before {
+    position: absolute;
+    content: '0';
+    left: 5px;
+    top: auto;
+}

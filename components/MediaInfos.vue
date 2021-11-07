@@ -1,5 +1,5 @@
 <template>
-    <div class="media-infos">
+    <div class="media-infos" :class="{ hide: state.hide }">
       <div class="image">
         <img
           alt="img-media-infos.jpg"
@@ -7,7 +7,7 @@
         />
       </div>
       <div class="media-infos__body">
-        <div class="btn-closed"></div>
+        <div class="btn-closed" @click="close()"></div>
         <h3 class="title">{{state.media_info.title}}</h3>
         <h4 class="sub-title">{{state.media_info.sub_title}}</h4>
         <!-- eslint-disable-next-line vue/no-v-html -->
@@ -27,6 +27,7 @@ export default defineComponent({
 
     const state = reactive({
       media_info: {},
+      hide: false
     })
 
     const getMediaInfo = () => {
@@ -38,13 +39,24 @@ export default defineComponent({
         })
     }
 
+    const close = () =>  {
+      state.hide = true
+    }
+
     onMounted(() => {
       getMediaInfo()
     })
 
     return {
       state,
+      close
     }
-  }
+  },
 })
 </script>
+
+<style>
+  .hide {
+    display: none;
+  }
+</style>
