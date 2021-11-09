@@ -5,14 +5,15 @@
           <div v-if="item.card" class="featured-card">
             <h3 class="title-large">{{ item.card.title_large }}</h3>
             <div class="image">
-              <img alt="img-act" src="~/assets/images/img-act-1.jpg" />
+              <img v-lazy-load :alt="item.card.image.alt" :src="item.card.image.src" />
             </div>
             <div class="info">
               <div class="list-button">
                 <a v-for="(link, id) in item.card.buttons" :key="id" :href="link.button_link" :class="'btn-'+link.button_color" class="btn btn-icon"
-                > {{ link.button_text }} <span class="icon"></span> </a>
+                > {{ link.button_text }} <span class="icon"></span></a>
               </div>
             </div>
+            <nuxt-link to="DetailActu" class="link-to"></nuxt-link>
           </div>
           <div v-if="item.flash_info" class="flash-info">
             <h3 class="title-large">{{ item.flash_info.title_large }}</h3>

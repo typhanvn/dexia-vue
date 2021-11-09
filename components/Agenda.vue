@@ -4,7 +4,7 @@
         <h2 class="title">{{state.agenda.title}}</h2>
         <div class="list-item">
           <div v-for="(item, i) in state.agenda.items" :key="i" class="agenda-item">
-            <div class="date"> {{ item.d_date }} </div>
+            <div class="date"> {{ item.date }} </div>
             <div class="title"> {{ item.title }} </div>
           </div>
 

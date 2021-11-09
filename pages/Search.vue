@@ -12,7 +12,7 @@
         </div>
       </div>
     </div>
-    <div v-if="showDataSearch && showDataSearch.length">
+    <div v-if="state.data">
       <div class="bg-light featured-card-list list-research list-short">
         <div class="wrapper">
           <h2 class="title">
@@ -30,7 +30,7 @@
                 </p>
                 <p class="date">{{ items.date }}</p>
                 <p class="description">
-                  {{ items.des }}
+                  {{ items.descriptions }}
                 </p>
               </div>
             </div>
@@ -40,17 +40,8 @@
 
       <div class="bg-light pagination">
         <div class="wrapper">
-          <!-- <ul class="pagination-list">
-            <li class="pager__item disabled pager__item--previous">
-              <a href="#"></a>
-            </li>
-            <li class="pager__item is-active"><a href="#">01</a></li>
-            <li class="pager__item"><a href="#">02</a></li>
-            <li class="pager__item"><a href="#">03</a></li>
-            <li class="pager__item"><a href="#">04</a></li>
-            <li class="pager__item pager__item--next"><a href="#"></a></li>
-          </ul> -->
           <jw-pagination
+            :class="{ isNumber : AddClass }"
             :items="showDataSearch"
             :labels="state.customLabels"
             :styles="state.customStyles"
@@ -66,7 +57,7 @@
 </template>
 
 <script>
-import { defineComponent, useRouter, reactive } from '@nuxtjs/composition-api'
+import { defineComponent, reactive } from '@nuxtjs/composition-api'
 import JwPagination from 'jw-vue-pagination'
 
 export default defineComponent({
@@ -82,10 +73,7 @@ export default defineComponent({
     }
   },
   
-  setup() {
-    const router = useRouter()
-    router.push('/Search')
-
+  setup(props) {
     const customLabels = {
       first: '',
       last: '',
@@ -96,6 +84,14 @@ export default defineComponent({
     const state = reactive({
       customLabels,
       pageOfItems: [],
+      isNumber: false,
+      data: props.showDataSearch && props.showDataSearch.length
+    })
+
+    const AddClass = (() => {
+      if ( state.isNumber >= 100) {
+        state.isNumber = true
+      }
     })
 
     const onChangePage = (pageOfItems) => {
@@ -104,6 +100,7 @@ export default defineComponent({
 
     return {
       state,
+      AddClass,
       onChangePage,
     }
   },

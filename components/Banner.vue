@@ -3,7 +3,10 @@
         <div class="banner__slider">
           <VueSlickCarousel :arrows="true" :dots="false">
             <div v-for="(item,index) in state.sliders" :key="index" class="banner-item">
-              <div class="image"><img alt="img-banner-1.png" src="~/assets/images/img-banner-1.png" /></div>
+              <div class="image">
+                <!-- after map data API -->
+                <img v-lazy-load :alt="item.image.alt" :src="item.image.src" />
+                </div>
               <div class="banner-item__content">
                 <div class="date">{{item.date}}</div>
                 <div class="title">{{item.title}}</div>

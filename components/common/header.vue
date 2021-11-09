@@ -3,9 +3,9 @@
   <header id="header" class="header">
     <div class="header-top">
       <div class="header-top__left">
-        <nuxt-link to="/" class="logo"
-          ><img src="~/assets/images/logo.svg" alt="logo.svg"
-        /></nuxt-link>
+        <a class="logo" href=""
+          @click.prevent="hideSearch()"><img src="~/assets/images/logo.svg" alt="logo.svg"
+        /></a>
         <div class="contact">
           <div class="contact__text">
             <i class="icon-phone"></i>
@@ -67,7 +67,6 @@
                 @click.prevent="isResault()"
               />
               <i class="icon-search">
-                <nuxt-link to="/Search"></nuxt-link>
               </i>
             </div>
           </div>
@@ -156,7 +155,7 @@
       </div>
     </div>
   </header>
-  <div v-if="search != ''" :class="{ hide: hide }">
+  <div v-if="search !=''" :class="{ hide: hide }">
       <Search :show-data-search="showDataSearch" />
     </div>
 </div>
@@ -210,6 +209,7 @@ export default defineComponent({
 
     const isOpen = () => {
       state.isActive = true
+      state.search = ''
     }
 
     const closeSearch = () => {
@@ -220,6 +220,18 @@ export default defineComponent({
     const isResault = () => {
       state.hide = false
       state.isActive = false
+      if(state.search !== '') {
+        router.push({
+          path: `/Search`,
+        })
+      }
+    }
+
+    const hideSearch = () => {
+      state.hide = true
+      router.push({
+          path: `/`,
+        })
     }
 
     const openLang = () => {
@@ -257,6 +269,7 @@ export default defineComponent({
       openLang,
       getLang,
       changeLang,
+      hideSearch
     }
   },
 })

@@ -2,8 +2,9 @@
     <div class="media-infos" :class="{ hide: state.hide }">
       <div class="image">
         <img
-          alt="img-media-infos.jpg"
-          src="~/assets/images/img-media-infos.jpg"
+          v-lazy-load
+          :alt="state.alt"
+          :src="state.src"
         />
       </div>
       <div class="media-infos__body">
@@ -27,7 +28,9 @@ export default defineComponent({
 
     const state = reactive({
       media_info: {},
-      hide: false
+      hide: false,
+      alt: '',
+      src: ''
     })
 
     const getMediaInfo = () => {
@@ -35,6 +38,8 @@ export default defineComponent({
         .then(res => {
           if(res.data.code === 200) {
             state.media_info = res.data.data.banner_info
+            state.alt = state.media_info.image && state.media_info.image.alt
+            state.src = state.media_info.image && state.media_info.image.src
           }
         })
     }
