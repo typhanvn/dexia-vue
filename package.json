@@ -23,7 +23,8 @@
     "nuxt": "^2.15.7",
     "nuxt-lazy-load": "^1.2.9",
     "vue-i18n": "^8.26.7",
-    "vue-slick-carousel": "^1.0.6"
+    "vue-slick-carousel": "^1.0.6",
+    "vue-tabs-component": "^1.5.0"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.14.7",

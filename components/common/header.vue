@@ -1,6 +1,6 @@
 <template>
 <div>
-  <header id="header" class="header">
+  <header id="header" class="header" :class="{ 'open-menu': isActiveMenu }" >
     <div class="header-top">
       <div class="header-top__left">
         <a class="logo" href=""
@@ -18,14 +18,16 @@
         <div class="date-time">{{ $t('header.label_date') }}</div>
         <ul class="list-icon">
           <li class="user">
-            <a href="#"
-              ><span>{{ $t('header.welcome') }}</span
+            <nuxt-link to="login" class="link-to"></nuxt-link>
+            <a
+              ><span>{{ $t('header.welcome') }} </span
               ><i class="icon-user"></i
-            ></a>
-            <ul>
+            >
+            </a>
+            <!-- <ul>
               <li><a href="/fr/user/220/edit">Profile</a></li>
               <li><a href="/fr/user/220/edit">Logout</a></li>
-            </ul>
+            </ul> -->
           </li>
           <li class="search">
             <a href @click.prevent="isOpen()"><i class="icon-search"></i></a>
@@ -71,10 +73,12 @@
             </div>
           </div>
         </form>
-        <a href="javascript: void(0);" class="btn-collapse" title="">
+
+        <div class="btn-collapse" :class="{ active : isActiveMenu }"
+           @click="openMenu()" title="">
           <span class="left"></span>
           <span class="right"></span>
-        </a>
+        </div>
       </div>
     </div>
     <div class="header-main">
@@ -95,8 +99,9 @@
           </div>
         </div>
         <ul class="main-menu">
-          <li class="has-sub">
-            <nuxt-link to="mon-entreprise"
+          <li class="has-sub is-active">
+            <nuxt-link to="mon-entreprise" :class="{ show : isActiveMenu }"
+                       @click="openSubMenu()"
               >{{ $t('header.main_menu.li_enter') }}
             </nuxt-link>
             <ul class="submenu">
@@ -185,6 +190,7 @@ export default defineComponent({
       default: () => [],
     },
   },
+
   setup(props) {
     const store = useStore()
     const router = useRouter()
@@ -194,6 +200,7 @@ export default defineComponent({
 
     const state = reactive({
       isActive: false,
+      isActiveMenu: false,
       hide: true,
       search: '',
       toogle: '',
@@ -242,6 +249,16 @@ export default defineComponent({
       }
     }
 
+    const openMenu = () => {
+      state.isActiveMenu = !state.isActiveMenu
+      const el = document.getElementsByTagName( 'html' )[0];
+      state.isActiveMenu ? el.classList.add("open-menu") : el.classList.remove("open-menu");
+    }
+
+    const openSubMenu = () => {
+      state.isActiveMenu = !state.isActiveMenu
+    }
+
     const getLang = () => {
       languages.value = store.state.locales
       langCurrent.value = store.state.locale
@@ -264,6 +281,8 @@ export default defineComponent({
       closeSearch,
       isResault,
       isOpenLang,
+      openMenu,
+      openSubMenu,
       languages,
       langCurrent,
       openLang,

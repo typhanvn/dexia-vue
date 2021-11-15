@@ -7,7 +7,7 @@
       <!-- eslint-disable-next-line vue/no-v-html -->
       <div class="title" v-html="state.change_job.title"></div>
       <a href="#" class="btn btn-light">{{ state.btn }}
-        <nuxt-link to="ListEvent" class="link-to"/>
+        <nuxt-link to="list-event" class="link-to"/>
       </a>
     </div>
   </div>

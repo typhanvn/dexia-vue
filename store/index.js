@@ -1,6 +1,7 @@
 export const state = () => ({
   locales: ['fr', 'en'],
-  locale: 'fr'
+  locale: 'fr',
+
 })
 
 export const mutations = {
@@ -10,3 +11,14 @@ export const mutations = {
     }
   }
 }
+
+// export const getters = {
+//   isAuthenticated(state) {
+//     return state.auth.loggedIn
+//   },
+
+//   loggedInUser(state) {
+//     console.log(state.auth.user, '123')
+//     return state.auth.user
+//   }
+// };

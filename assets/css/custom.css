@@ -1,96 +1,242 @@
 #main-content {
-    padding-top: 140px;
+  padding-top: 140px;
 }
 
 .pagination .page-item.active a {
-    color: #002596;
-} 
-
-  .pagination {
-    display: flex !important;
-    justify-content: center;
-    align-items: center;
-  }
-
-.pagination li {
-    margin-right: 0.5rem;
-    position: relative;
+  color: #002596;
 }
 
-.pagination li.page-item:not(.disabled).active a, 
+.pagination {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+}
+
+.pagination li {
+  margin-right: 0.5rem;
+  position: relative;
+}
+
+.pagination li.page-item:not(.disabled).active a,
 .pagination li.page-item:not(.disabled):hover a {
-    color: #002596;
+  color: #002596;
 }
 
 .pagination li:after {
-    content: '';
-    border-radius: 50%;
-    width: 1.875rem;
-    height: 1.875rem;
-    position: absolute;
-    right: 0;
-    top: 0;
-    background-color: #00a7db;
-    transition: transform .3s;
-    transform: scale(0);
+  content: '';
+  border-radius: 50%;
+  width: 1.875rem;
+  height: 1.875rem;
+  position: absolute;
+  right: 0;
+  top: 0;
+  background-color: #00a7db;
+  transition: transform .3s;
+  transform: scale(0);
 }
 
 .pagination li.page-item:hover:after {
-    transform: scale(1);
+  transform: scale(1);
 }
 
 .pagination li.page-item.last,
 .pagination li.page-item.first {
-    display: none;
+  display: none;
 }
 
 .pagination li.page-item.previous a::before {
-    content: '\E80C';
-    font-size: 0.75rem;
-    font-family: fontello;
-    letter-spacing: normal;
-    font-weight: 400;
-    font-style: normal;
-    text-decoration: none;
-    user-select: none;
-    color: #002596;
+  content: '\E80C';
+  font-size: 0.75rem;
+  font-family: fontello;
+  letter-spacing: normal;
+  font-weight: 400;
+  font-style: normal;
+  text-decoration: none;
+  user-select: none;
+  color: #002596;
 }
 
 .pagination li.page-item.next a::before {
-    content: '\E80B';
-    font-size: 0.75rem;
-    font-family: fontello;
-    letter-spacing: normal;
-    font-weight: 400;
-    font-style: normal;
-    text-decoration: none;
-    user-select: none;
-    color: #002596;
+  content: '\E80B';
+  font-size: 0.75rem;
+  font-family: fontello;
+  letter-spacing: normal;
+  font-weight: 400;
+  font-style: normal;
+  text-decoration: none;
+  user-select: none;
+  color: #002596;
 }
 
 .pagination li.page-item.previous a,
 .pagination li.page-item.next a {
-    font-size: 0 !important;
+  font-size: 0 !important;
 }
 
 .pagination a {
-    font-size: 0.6875rem;
-    line-height: 1.1875rem;
-    font-weight: bold;
-    letter-spacing: 0.0625rem;
-    height: 1.875rem;
-    width: 1.875rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    z-index: 1;
-    color: #c1c9ca;
+  font-size: 0.6875rem;
+  line-height: 1.1875rem;
+  font-weight: bold;
+  letter-spacing: 0.0625rem;
+  height: 1.875rem;
+  /* width: 1.875rem; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+  color: #c1c9ca;
 }
 
 .page-number a.page-link:before {
-    position: absolute;
-    content: '0';
-    left: 5px;
-    top: auto;
+  position: absolute;
+  content: '0';
+  left: 5px;
+  top: auto;
+}
+
+.isNumber .page-number a.page-link:before {
+  display: none;
+}
+
+.isNumber .page-number:nth-child(3) a.page-link:before,
+.isNumber .page-number:nth-child(4) a.page-link:before,
+.isNumber .page-number:nth-child(5) a.page-link:before,
+.isNumber .page-number:nth-child(6) a.page-link:before,
+.isNumber .page-number:nth-child(7) a.page-link:before,
+.isNumber .page-number:nth-child(8) a.page-link:before,
+.isNumber .page-number:nth-child(9) a.page-link:before {
+  display: block;
+}
+
+.wrapper-login {
+  margin-bottom: 3.125rem;
+  color: #333
+}
+
+@media screen and (min-width: 1024px) {
+  .wrapper-login .wrapper {
+    width: 48.75rem
+  }
+}
+
+.wrapper-login ul {
+  margin-bottom: 1.875rem
+}
+
+.wrapper-login ul li {
+  display: inline-block
+}
+
+.wrapper-login ul li:not(:last-child) {
+  margin-right: 0.9375rem
+}
+
+.wrapper-login ul li a {
+  padding-bottom: 0.3125rem
+}
+
+@media screen and (min-width: 768px) {
+  .wrapper-login ul li a {
+    font-size: 1.125rem
+  }
+}
+
+@media screen and (max-width: 321px) {
+  .wrapper-login ul li a {
+    font-size: 0.75rem
+  }
+}
+
+.wrapper-login ul li.is-active a {
+  font-weight: bold;
+  color: #002596;
+  border-bottom: 0.0625rem solid #002596
+}
+
+.wrapper-login label {
+  font-size: 1.125rem;
+  font-family: "Avenir LT W02 85"
+}
+
+.wrapper-login input:not(.form-submit) {
+  color: #333;
+  font-size: 1.125rem;
+  letter-spacing: -0.0025rem;
+  padding-bottom: 0.625rem;
+  border-bottom: 0.0625rem solid #002596;
+  width: 100%;
+  font-family: "Avenir LT W02 85";
+  display: block;
+  max-width: 25rem;
+  margin-bottom: 0.625rem
+}
+
+.wrapper-login input:not(.form-submit)::-webkit-input-placeholder {
+  color: #333;
+  font-size: 1.125rem;
+  letter-spacing: -0.0025rem;
+  font-family: "Avenir LT W02 85"
+}
+
+.wrapper-login input:not(.form-submit)::-moz-placeholder {
+  color: #333;
+  font-size: 1.125rem;
+  letter-spacing: -0.0025rem;
+  font-family: "Avenir LT W02 85"
+}
+
+.wrapper-login input:not(.form-submit):-ms-input-placeholder {
+  color: #333;
+  font-size: 1.125rem;
+  letter-spacing: -0.0025rem;
+  font-family: "Avenir LT W02 85"
+}
+
+.wrapper-login input:not(.form-submit)::-ms-input-placeholder {
+  color: #333;
+  font-size: 1.125rem;
+  letter-spacing: -0.0025rem;
+  font-family: "Avenir LT W02 85"
+}
+
+.wrapper-login input:not(.form-submit)::placeholder {
+  color: #333;
+  font-size: 1.125rem;
+  letter-spacing: -0.0025rem;
+  font-family: "Avenir LT W02 85"
+}
+
+.wrapper-login .form-submit {
+  position: relative;
+  font-family: "Avenir LT W02 85";
+  display: inline-block;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #fff;
+  text-decoration: none;
+  vertical-align: middle;
+  padding: 0.5625rem 1.875rem;
+  font-size: 1rem;
+  text-align: center;
+  border-radius: 1.3125rem;
+  overflow: hidden;
+  z-index: 1;
+  background-color: #002596;
+  -webkit-transition: all .3s;
+  -o-transition: all .3s;
+  transition: all .3s;
+  margin-top: 1.875rem
+}
+
+.wrapper-login .form-submit:hover {
+  background-color: #070e57
+}
+
+.wrapper-login .description {
+  margin-bottom: 0.625rem
+}
+
+.wrapper-login div[aria-live=polite] {
+  display: none
 }

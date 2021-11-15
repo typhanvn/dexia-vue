@@ -26,6 +26,7 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '~/plugins/i18n.js',
+    '~plugins/axios'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -52,12 +53,50 @@ export default {
   axios: {
     // proxy: true,
     retry: true,
-    baseURL: 'https://dexia-intranet-default-rtdb.firebaseio.com/api'
+    baseURL: 'https://dexia-intranet-default-rtdb.firebaseio.com/api',
+    // debug: process.env.DEBUG || false,
+    // proxyHeaders: false,
+    // credentials: false,
+    // headers: {
+    //   "Content-Type": "application/json",
+    //   'Access-Control-Allow-Origin': '*',
+    //   "Access-Control-Allow-Methods": "DELETE, POST, GET",
+    //   "Access-Control-Allow-Headers": "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With"
+    //   },
+  },
+
+  auth: {
+    strategies: {
+      local: {
+        endpoints: {
+          login: {
+            url: 'accounts/token',
+            method: 'post',
+            propertyName: 'access',
+          },
+          user: {
+            url: 'accounts/',
+            method: 'get',
+            propertyName: 'users'
+          },
+          tokenRequired: true,
+          logout: false
+        }
+      },
+      watchLoggedIn: true,
+      redirect: {
+        login: '/login',
+        logout: '/',
+        callback: '/login',
+        home: '/'
+      }
+    }
   },
 
   router: {
     middleware: ['i18n']
   },
+  
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {

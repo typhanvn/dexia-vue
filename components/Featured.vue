@@ -13,7 +13,7 @@
                 > {{ link.button_text }} <span class="icon"></span></a>
               </div>
             </div>
-            <nuxt-link to="DetailActu" class="link-to"></nuxt-link>
+            <nuxt-link to="detail-actu" class="link-to"></nuxt-link>
           </div>
           <div v-if="item.flash_info" class="flash-info">
             <h3 class="title-large">{{ item.flash_info.title_large }}</h3>
